@@ -1,23 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+
+import React, { useReducer } from "react";
+import reducer from "./reducer";
+
+const initialState = {
+  count: 0,
+};
 
 function App() {
+  const [state, dispatch] = useReducer(reducer, initialState);
+
+  function Increase() {
+    dispatch({ type: "INCREASE" });
+  }
+
+  function Decrease() {
+    dispatch({ type: "DECREASE" });
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="App" style={{ fontSize: "40px" }}>
+      Counter App
+      <div className="App" style={{ fontSize: "40px", display:"flex", justifyContent: "space-around",  }}>
+        <h1 onClick={Decrease}>-</h1>
+        <h1>{state.count}</h1>
+        <h1 onClick={Increase}>+</h1>
+      </div>
     </div>
   );
 }
